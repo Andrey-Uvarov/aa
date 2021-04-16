@@ -21,12 +21,20 @@ public class Pin : MonoBehaviour
     {
         if (collisionObj.tag == "Pin")
         {
+            FindObjectOfType<Manager>().GameOver();
             Debug.Log("Game Over!!!");
         }
        else if (collisionObj.tag == "Rotator")
         {
             isPinned = true;
             transform.SetParent(collisionObj.transform);
+            FindObjectOfType<ScoreText>().ChangeNumberOfPins();
+            Manager manager = FindObjectOfType<Manager>();
+            manager.AddPin();
+            if (manager.GetTotalNumberOfPins() == manager.GetcurrentNumberOfPins())
+            {
+                manager.LevelComplete();
+            }
         }
     }
 }

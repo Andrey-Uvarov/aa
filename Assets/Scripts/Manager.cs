@@ -6,16 +6,34 @@ public class Manager : MonoBehaviour
 {
 
     [SerializeField] Rotator rotator;
+    [SerializeField] PinSpawner pinSpawner;
+    [SerializeField] CameraAnimator animator;
+    [SerializeField] int numberOfPins;
+    private int currentNumberOfPins = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public int GetTotalNumberOfPins() { return numberOfPins; }
+
+    public int GetcurrentNumberOfPins() { return currentNumberOfPins; }
+
+    public void AddPin()
     {
-        
+        currentNumberOfPins++;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameOver()
     {
-        
+        DisableGameElements();
+        animator.SetGameOverTrigger();
+    }
+
+    public void LevelComplete()
+    {
+        DisableGameElements();
+        animator.SetLevelCompleteTrigger();
+    }
+    private void DisableGameElements()
+    {
+        rotator.enabled = false;
+        pinSpawner.enabled = false;
     }
 }

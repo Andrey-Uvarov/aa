@@ -26,9 +26,15 @@ public class Manager : MonoBehaviour
         animator.SetGameOverTrigger();
     }
 
-    public void LevelComplete()
+    public void LevelComplete(int sceneIndex)
     {
         DisableGameElements();
+        int nextLevelIndex = PlayerPrefs.GetInt(Level.NEXT_LEVEL_KEY, Level.LEVEL_TO_START);
+        if (sceneIndex >= nextLevelIndex)
+        {
+            PlayerPrefs.SetInt(Level.NEXT_LEVEL_KEY, sceneIndex + 1);
+        }
+
         animator.SetLevelCompleteTrigger();
     }
     private void DisableGameElements()

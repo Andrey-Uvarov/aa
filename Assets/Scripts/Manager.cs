@@ -20,9 +20,10 @@ public class Manager : MonoBehaviour
         currentNumberOfPins++;
     }
 
-    public void GameOver()
+    public void GameOver(int sceneIndex)
     {
         DisableGameElements();
+        PlayerPrefs.SetInt(Level.LAST_LEVEL_KEY, sceneIndex);
         animator.SetGameOverTrigger();
     }
 
